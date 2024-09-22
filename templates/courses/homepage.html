@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Platform - Learn Anything</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .navbar {
+            background-color: #1f2937;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+        .navbar a.logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        .navbar nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 15px;
+        }
+        .navbar nav ul li a:hover {
+            background-color: #4b5563;
+            border-radius: 5px;
+        }
+        .banner {
+            background: url('{% static "img/banner-bg.jpg" %}') no-repeat center center;
+            background-size: cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .banner h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            background-color: #ff5722;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #e64a19;
+        }
+        .featured-courses {
+            background-color: #f7f7f7;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .featured-courses h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 40px;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .course-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .course-info {
+            padding: 20px;
+        }
+        .course-info h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .course-info p {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        .details-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .details-button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">CoursePlatform</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'course_list' %}">Courses</a></li>
+                    <li><a href="/about/">About Us</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a href="/logout/">Logout</a></li>
+                    {% else %}
+                        <li><a href="/login/">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Learn DevOps, Cloud, and More</h1>
+            <p>Explore hands-on courses and master the skills to take your career to the next level.</p>
+            <a href="{% url 'course_list' %}" class="cta-button">Browse Courses</a>
+        </div>
+    </section>
+
+    <!-- Featured Courses Section -->
+    <section class="featured-courses">
+        <h2>Featured Courses</h2>
+        <div class="course-grid">
+            {% for course in courses %}
+                <div class="course-card">
+                    <img src="{% if course.thumbnail %}{{ course.thumbnail.url }}{% else %}{% static 'img/default-course.png' %}{% endif %}" alt="{{ course.title }}">
+                    <div class="course-info">
+                        <h3>{{ course.title }}</h3>
+                        <p>{{ course.summary|truncatewords:20 }}</p>
+                        <a href="{% url 'course_detail' course.id %}" class="details-button">View Course</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 CoursePlatform. All rights reserved.</p>
+    </footer>
+</body>
+</html>

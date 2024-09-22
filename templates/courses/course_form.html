@@ -1,0 +1,17 @@
+<form method="POST">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" value="{{ form.title.value }}">
+    
+    <label for="summary">Summary:</label>
+    <textarea name="summary" id="summary">{{ form.summary.value }}</textarea>
+    
+    <label for="status">Status:</label>
+    <select name="status" id="status">
+        <option value="draft" {% if form.status.value == 'draft' %}selected{% endif %}>Draft </option>
+
+        <option value="published" {% if form.status.value == 'published' %}selected{% endif %}> Published </option>
+    </select>
+    
+    <button type="submit">Save</button>
+</form>

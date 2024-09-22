@@ -1,0 +1,11 @@
+<h1>{{ module.title }}</h1>
+<p>{{ module.content }}</p>
+
+{% if progress.completed %}
+    <p>Module completed</p>
+{% else %}
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Mark as completed</button>
+    </form>
+{% endif %}

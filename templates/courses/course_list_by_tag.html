@@ -1,0 +1,25 @@
+<!-- templates/courses/course_list_by_tag.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses tagged with "{{ tag.name }}"</title>
+</head>
+<body>
+    <h1>Courses tagged with "{{ tag.name }}"</h1>
+
+    <!-- Display list of courses -->
+    <ul>
+        {% for course in courses %}
+            <li>
+                <a href="{% url 'course_detail' course.id %}">{{ course.title }}</a>
+            </li>
+        {% empty %}
+            <li>No courses available under this tag.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'course_list' %}">Back to all courses</a>
+</body>
+</html>

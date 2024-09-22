@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Courses Platform{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

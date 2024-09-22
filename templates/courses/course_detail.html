@@ -1,0 +1,44 @@
+<!-- courses/course_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }}</title>
+</head>
+<body>
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.summary }}</p>
+
+    <!-- Show course tags -->
+    <h3>Tags:</h3>
+    <ul>
+        {% for tag in course.tags.all %}
+            <li><a href="{% url 'courses_by_tag' tag.slug %}">{{ tag.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Modules</h2>
+    <ul>
+        {% for module in modules %}
+            <li>
+                <a href="{% url 'module_detail' course.id module.id %}">{{ module.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Show creator bio and social links -->
+    <h2>About the Instructor</h2>
+    <p>{{ creator_profile.bio }}</p>
+    
+    <h3>Connect with the Instructor:</h3>
+    <ul>
+        <li><a href="{{ creator_profile.linkedin }}" target="_blank">LinkedIn</a></li>
+        <li><a href="{{ creator_profile.twitter }}" target="_blank">Twitter</a></li>
+        <li><a href="{{ creator_profile.instagram }}" target="_blank">Instagram</a></li>
+        <li><a href="{{ creator_profile.website }}" target="_blank">Website</a></li>
+    </ul>
+
+    <a href="{% url 'course_list' %}">Back to Courses</a>
+</body>
+</html>

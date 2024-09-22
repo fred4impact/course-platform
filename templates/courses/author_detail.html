@@ -1,0 +1,34 @@
+<!-- templates/courses/author_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ author_profile.user.username }}'s Profile</title>
+</head>
+<body>
+    <h1>About {{ author_profile.user.username }}</h1>
+
+    <!-- Display Author Bio -->
+    <p>{{ author_profile.bio }}</p>
+
+    <!-- Display Author's Social Links -->
+    <h2>Connect with {{ author_profile.user.username }}</h2>
+    <ul>
+        {% if author_profile.linkedin %}
+            <li><a href="{{ author_profile.linkedin }}" target="_blank">LinkedIn</a></li>
+        {% endif %}
+        {% if author_profile.twitter %}
+            <li><a href="{{ author_profile.twitter }}" target="_blank">Twitter</a></li>
+        {% endif %}
+        {% if author_profile.website %}
+            <li><a href="{{ author_profile.website }}" target="_blank">Website</a></li>
+        {% endif %}
+        {% if author_profile.instagram %}
+            <li><a href="{{ author_profile.instagram }}" target="_blank">Instagram</a></li>
+        {% endif %}
+    </ul>
+
+    <a href="{% url 'course_list' %}">Back to Courses</a>
+</body>
+</html>

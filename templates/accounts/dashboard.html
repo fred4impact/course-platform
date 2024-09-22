@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome {{ request.user.username }}</h1>
+    <h2>Your Enrolled Courses:</h2>
+    <ul>
+        {% for enrollment in enrollments %}
+            <li>
+                <a href="{% url 'course_detail' enrollment.course.id %}">{{ enrollment.course.title }}</a>
+                {% if enrollment.completed %}
+                    <span> - Completed</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>You are not enrolled in any courses.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'course_list' %}">Browse Courses</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
