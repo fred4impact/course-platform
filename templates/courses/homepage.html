@@ -46,7 +46,7 @@
             border-radius: 5px;
         }
         .banner {
-            background: url('{% static "img/banner-bg.jpg" %}') no-repeat center center;
+            background: url('{% static "img/banner.jpg" %}') no-repeat center center;
             background-size: cover;
             height: 70vh;
             display: flex;
@@ -90,7 +90,7 @@
         }
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
         }
         .course-card {
@@ -105,8 +105,8 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
         .course-card img {
-            width: 100%;
-            height: 200px;
+            width: 50%;
+            height: 100px;
             object-fit: cover;
         }
         .course-info {
@@ -150,7 +150,7 @@
     <!-- Header -->
     <header>
         <div class="navbar">
-            <a href="/" class="logo">CoursePlatform</a>
+            <a href="/" class="logo">Online Courses</a>
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
@@ -170,8 +170,8 @@
     <!-- Banner Section -->
     <section class="banner">
         <div class="banner-content">
-            <h1>Learn DevOps, Cloud, and More</h1>
-            <p>Explore hands-on courses and master the skills to take your career to the next level.</p>
+            <!-- <h1>Learn DevOps, Cloud, and More</h1>
+            <p>Explore hands-on courses and master the skills to take your career to the next level.</p> -->
             <a href="{% url 'course_list' %}" class="cta-button">Browse Courses</a>
         </div>
     </section>

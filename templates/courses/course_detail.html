@@ -14,7 +14,7 @@
     <h3>Tags:</h3>
     <ul>
         {% for tag in course.tags.all %}
-            <li><a href="{% url 'courses_by_tag' tag.slug %}">{{ tag.name }}</a></li>
+            <li><a href="{% url 'course_list_by_tag' tag.slug %}">{{ tag.name }}</a></li>
         {% endfor %}
     </ul>
 
