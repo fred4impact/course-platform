@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-=yv*x8x^rhs0-ys+$(+hm+c^#0@l4tne&^2%gn$#ydygs0-!!9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -127,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 # settings.py
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -146,9 +147,6 @@ JAZZMIN_SETTINGS = {
     # "order_with_respect_to": ["core", 'userauths', "transactions" , 'addon', 'blog']
  
 }
-
-
-
 
 
 
