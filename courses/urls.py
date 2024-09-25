@@ -1,6 +1,7 @@
 # courses/urls.py
 from django.urls import path
 from . import views
+from .views import create_checkout_session
 
 urlpatterns = [
    # Home page with the list of courses
@@ -20,4 +21,16 @@ urlpatterns = [
 
     # Author detail view (for course creators, displaying bio and social links)
     path('author/<int:author_id>/', views.author_detail, name='author_detail'),
+
+    path('<int:course_id>/checkout/', views.checkout, name='checkout'),
+
+    
+    
+    path('<int:course_id>/success/', views.payment_success, name='payment_success'),
+
+    # path('courses/<int:course_id>/checkout/', views.create_checkout_session, name='create_checkout_session'),
+
+    path('create-checkout-session/<int:course_id>/', create_checkout_session, name='create_checkout_session'),
+
+
 ]

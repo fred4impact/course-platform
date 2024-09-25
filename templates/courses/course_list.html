@@ -1,17 +1,32 @@
 <!-- courses/course_list.html -->
 {% load static %}
-{% for course in courses %}
-    <div class="course-card">
-        <img src="{% if course.thumbnail %}{{ course.thumbnail.url }}{% else %}{% static 'img/default-course.png' %}{% endif %}" alt="{{ course.title }}">
-        <div class="course-info">
-            <h3>{{ course.title }}</h3>
-            <p>{{ course.summary|truncatewords:20 }}</p>
-            {% if course.is_free %}
-                <p><strong>This course is free!</strong></p>
-            {% else %}
-                <p><strong>This course is paid</strong></p>
-            {% endif %}
-            <a href="{% url 'course_detail' course.id %}" class="details-button">View Course</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+<div class="course-list-container">
+    {% for course in courses %}
+        <div class="course-card">
+            <img src="{% if course.thumbnail %}{{ course.thumbnail.url }}{% else %}{% static 'img/default-course.png' %}{% endif %}" alt="{{ course.title }}" class="course-image">
+            <div class="course-info">
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.summary|truncatewords:20 }}</p>
+                {% if course.is_free %}
+                    <p><strong>This course is free!</strong></p>
+                {% else %}
+                    <p><strong>This course is paid</strong></p>
+                {% endif %}
+                <a href="{% url 'course_detail' course.id %}" class="details-button">View Course</a>
+            </div>
         </div>
-    </div>
-{% endfor %}
+    {% endfor %}
+</div>
+
+</body>
+</html>

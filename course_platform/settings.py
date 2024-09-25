@@ -9,14 +9,25 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import environ
 import os
-from dotenv import load_dotenv
 from pathlib import Path
+# Define the base directory of the project
+BASE_DIR = Path(__file__).resolve().parent.parent
+# Initialize environment variables
+env = environ.Env(
+    DEBUG=(bool, False)  # Set the default value for DEBUG as False
+)
 
-load_dotenv()  # Load environment variables from .env file
+# Reading the .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+ # Load environment variables from .env file
+
+# Stripe keys
+STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,6 +142,9 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # settings.py
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# settings.py
+LOGIN_REDIRECT_URL = '/accounts/dashboard/'  # Redirects to the dashboard
 
 
 # Default primary key field type

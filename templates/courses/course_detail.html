@@ -1,10 +1,78 @@
-<!-- courses/course_detail.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ course.title }}</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #checkout-button {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #checkout-button:hover {
+            background-color: #218838;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>{{ course.title }}</h1>
@@ -29,16 +97,51 @@
 
     <!-- Show creator bio and social links -->
     <h2>About the Instructor</h2>
-    <p>{{ creator_profile.bio }}</p>
+    <p>{{ course.creator.profile.bio }}</p>
     
     <h3>Connect with the Instructor:</h3>
     <ul>
-        <li><a href="{{ creator_profile.linkedin }}" target="_blank">LinkedIn</a></li>
-        <li><a href="{{ creator_profile.twitter }}" target="_blank">Twitter</a></li>
-        <li><a href="{{ creator_profile.instagram }}" target="_blank">Instagram</a></li>
-        <li><a href="{{ creator_profile.website }}" target="_blank">Website</a></li>
+        <li><a href="{{ course.creator.profile.linkedin }}" target="_blank">LinkedIn</a></li>
+        <li><a href="{{ course.creator.profile.twitter }}" target="_blank">Twitter</a></li>
+        <li><a href="{{ course.creator.profile.instagram }}" target="_blank">Instagram</a></li>
+        <li><a href="{{ course.creator.profile.website }}" target="_blank">Website</a></li>
     </ul>
 
-    <a href="{% url 'course_list' %}">Back to Courses</a>
+    <!-- Payment button for paid courses -->
+    {% if not course.is_free %}
+        <h3>Price: ${{ course.price }}</h3>
+        <button id="checkout-button">Buy Now</button>
+
+        <script type="text/javascript">
+            // Ensure you have the public key passed from the backend
+            var stripe = Stripe('{{ stripe_public_key }}');  
+            var checkoutButton = document.getElementById('checkout-button');
+
+            checkoutButton.addEventListener('click', function() {
+                // Fetch the checkout session
+                fetch("{% url 'create_checkout_session' course.id %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'  // Ensure the CSRF token is passed correctly
+                    },
+                })
+                .then(response => response.json())
+                .then(session => {
+                    if (session.error) {
+                        alert(session.error);  // Handle any errors returned from the session creation
+                    } else {
+                        // Redirect to Stripe Checkout
+                        return stripe.redirectToCheckout({ sessionId: session.id });
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
+            });
+        </script>
+    {% endif %}
+
+    <a href="{% url 'course_list' %}" class="back-button">Back to Courses</a>
 </body>
 </html>

@@ -1,0 +1,7 @@
+<h1>Checkout for {{ course.title }}</h1>
+<p>Price: ${{ course.price }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Proceed to Payment</button>
+</form>

@@ -17,7 +17,7 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')  # Draft or Published status
     is_free = models.BooleanField(default=False)  # New field to mark if a course is free
-    
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # For paid courses
     published_at = models.DateTimeField(null=True, blank=True)  # When the course was published
     
     tags = TaggableManager()  # Add the TaggableManager for course tags

@@ -1,0 +1,145 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 40px;
+}
+
+.course-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the course cards */
+    gap: 10px;
+}
+
+.course-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px; /* Set a fixed width for cards */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.course-image {
+    width: 100%;
+    height: 180px; /* Set the height for uniform image size */
+    object-fit: cover; /* Crop images to fit the defined height */
+}
+
+.course-info {
+    padding: 15px;
+}
+
+.course-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.course-info p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.details-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.details-button:hover {
+    background-color: #0056b3;
+}
+
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.course-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-summary {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.tags-list, .modules-list, .social-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tags-list li, .modules-list li, .social-links li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.tag, .module-link {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.tag:hover, .module-link:hover {
+    color: #0056b3;
+}
+
+.instructor-bio {
+    font-size: 14px;
+    color: #666;
+}
+
+.checkout-button {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
